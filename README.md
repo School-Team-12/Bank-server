@@ -12,11 +12,11 @@ Bank Server Project
 
 ## Team Members
 
-     👾 Anurag 
+      Anurag 
 
-     🐱‍👤 Anushka
+      Anushka
 
-     🤖 MandraSaptak
+      MandraSaptak
 
 ## Technologies Used
 
