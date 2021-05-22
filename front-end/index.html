@@ -1,50 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>MSM</title>
-  </head>
-  <body>
-    <div class="container">
-      <img id="bld" src="resources/building.svg" alt="building" />
-      <img id="sun" src="resources/sun.svg" alt="sun" />
-      <div class="grid-container">
-        <div class="left">
-          <img class="logo" src="resources/logo.svg" alt="logo" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+</head>
 
-            <a href="" target="_blank"><button id="newuserbtt" onclick="newuser()">Add new user</button></a>
+<body>
 
-          <script>
-            function newuser() {
-              alert("Hello There! The HREF is empty. During the implementation of NewUser Page Open it on a new windows like G-authentication page. So the page opens to a new Blank Tab ");
-              
+    <div class="mobileerror" style="display: grid; place-items: center;">
+        <div class="container">
+            <div>
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_9v71eni2.json" background="transparent" speed="1" style="width: 300px; height: 300px; padding: 30px;" loop autoplay></lottie-player>
+                <h1 style="text-align: center;">⚠ Sorry, Mobile Devices are not supported<br>@bank-server</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="root">
+
+        <div class="loadingelement " id="loading">
+            <h1>🚚 Loading...</h1>
+        </div>
+
+
+
+        <div class="container ">
+            <img id="bld" src="resources/building.svg " alt="building" />
+            <img id="sun" src="resources/sun.svg " alt="sun" />
+            <div class="grid-container ">
+                <div class="left">
+                    <img class="logo" src="resources/logo.svg " alt="logo " />
+
+                    <!-- <a href=" " target="_blank "><button id="newuserbtt " onclick="loading() ">Add new user</button></a> -->
+
+                    <button id="newuserbtt" onclick="newuser()" style="cursor: pointer; ">Add new user</button>
+
+                    <script>
+                        function newuser() {
+                            alert("Hello There! The HREF is empty. During the implementation of NewUser Page Open it on a new windows like G-authentication page. So the page opens to a new Blank Tab ");
+                            window.open("style.css", "Add New User", "width=400,height=600 ,top=100,left=500, toolbar=no");
+
+                        }
+                    </script>
+
+
+                    <h1>Today's Activity:</h1>
+                    <div class="boxcon ">
+                        <div class="box">
+                            <h1>Transaction:</h1>
+                            <h2 id="todaytransac" style="background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);; -webkit-background-clip: text;">
+                                ---</h2>
+                        </div>
+
+                        <div class="box">
+                            <h1>Deposit:</h1>
+                            <h2 id="todaytransac" style="background-image: linear-gradient(-60deg, #16A085 0%, #F4D03F 100%); -webkit-background-clip: text;">
+                                ---</h2>
+                        </div>
+
+                        <div class="box">
+                            <h1>Withdrawal:</h1>
+                            <h2 id="todaytransac" style="background-image: linear-gradient(to right, #B721FF 0%, #21D4FD 100%);; -webkit-background-clip: text;">
+                                ---</h2>
+
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="middle">
+                    <div class="searchbar">
+                        <i><img src="resources/search.png" onclick="srhbtn()" ></i>
+                        <input type="text" id="searchinput" onkeyup="searchfunction()" placeholder="Search" style="margin-left: 10px;width: 75%;">
+                        <i><img id="searchcancel" src="resources/remove.png" onclick="clrsrh()" ></i>
+                        <i onclick="refreshajax()"><img src="resources/refresh.png"></i>
+                        <script>
+                            //search system
+
+                            function srhbtn() {
+                                document.getElementById('searchinput').focus()
+                            }
+
+                            function clrsrh() {
+                                var searchvalue = document.getElementById('searchinput').value = '';
+                                searchfunction()
+                            }
+
+                            function refreshajax() {
+                                $('#tbody').html("")
+                                ajaxfunction()
+                            }
+
+                            const searchfunction = () => {
+
+
+
+                                var search = document.getElementById("searchinput").value.toUpperCase()
+                                    // tr = $('tr')
+                                    // $('#' + search).trigger("click")
+
+                                let myTable = document.getElementById('mytable');
+                                let tr = myTable.getElementsByTagName('tr')
+
+                                for (i = 0; i < tr.length; i++) {
+                                    let td = tr[i].getElementsByTagName('td')[0]
+                                        // if ($('#' + search).attr("value") != search) {
+                                        //     $('#' + search).hide()
+                                        //     console.log("focus")
+                                        // } else {
+                                        //     continue
+                                        // }
+                                    if (td) {
+                                        let textvalue = td.textContent || td.innerHTML;
+                                        if (textvalue.toUpperCase().indexOf(search) > -1) {
+                                            tr[i].style.display = "";
+                                        } else {
+                                            tr[i].style.display = "none";
+                                        }
+                                    }
+
+
+
+
+
+
+                                }
+                            }
+
+
+                            // function searchid() {
+
+                            //     // console.log($('#' + search).attr("id"))
+                            // }
+                        </script>
+
+
+                    </div>
+
+                    <div class="namelist">
+                        <table style="width:100%" id="mytable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 250px;">Name:</th>
+                                    <th style="color: rgb(236, 97, 115)">Last Activity:</th>
+                                    <th style="text-align: right; color: rgb(66, 124, 231); padding-right: 10px;">Latest Transaction:
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+
+                                <!-- the fetchedData is outputted here in form of a table list -->
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+
+
+
+
+
+                </div>
+
+
+
+
+                <div class="right">
+                    <div class="datacontainer" style="margin: 30px;">
+
+                        <img id="profileImg" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="user" height="200px">
+
+                        <h1 id="nameF">Name:</h1>
+                        <p id="ageF">Age:</p>
+                        <p id="sexF">Sex:</p>
+                        <p id="occuF">Occupation:</p>
+                        <p id="addF">Address:</p>
+                        <br>
+                        <h1 id="uidF">UniqueID:</h1>
+                        <p id="ucF">User Created:</p>
+                        <p id="contactF">Contact No:</p>
+                    </div>
+
+
+                    <div class="boxcon ">
+                        <div class="box" id="lasttransac">
+                            <h1>Last Transaction:</h1>
+                            <h2 id="h2lasttran" style="background: -webkit-linear-gradient(#F77062, #FE5196); -webkit-background-clip: text;">
+                                ---</h2>
+                        </div>
+                        <div class="box">
+                            <h1>Balance:</h1>
+                            <h2 style="background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);; -webkit-background-clip: text;">
+                                ---</h2>
+                        </div>
+                        <div class="box">
+                            <h1>Credit Points:</h1>
+                            <h2 style="background-image: linear-gradient(to top, #9795f0 0%, #cc919e 100%); -webkit-background-clip: text;">
+                                ---</h2>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            window.addEventListener("load", loading());
+
+            function loading() {
+                // $(.loadingelement).css("display ", "none ")
+                // $('.loadingelement').css("display", "none");
+                // $('.loadingelement').fadeToggle(1000);
+                console.log("loading");
+                document.getElementById('loading').style.display = "block";
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = "none";
+                }, 2000);
+
+
+            }
+        </script>
+
+        <script>
+            //Ajax Function on Document Load
+
+            var apiurl = 'https://api.airtable.com/v0/appCfzSqqqkAA8QmB/Basic%20Details';
+
+
+            var fetchedData = '';
+            var fetchtotaltransaction = '';
+            var calculatedtransaction = '';
+            var agcal = '';
+
+            $.ajaxSetup({
+                headers: {
+                    'Authorization': 'Bearer keyNsZ0hHEcrleEvY'
+                }
+            });
+
+
+            $(document).ready(ajaxfunction())
+
+
+
+            function ajaxfunction() {
+                $.ajax({
+                    method: 'GET',
+                    url: apiurl,
+                    dataType: 'JSON',
+                    error: function(jqXHR, textStatus, errorThrown) {
+
+                        alert("🤖 Error ⚠ E.Code: " + jqXHR.status + "\r\n Check Network and Refresh 👈");
+                    }
+                }).done(function(data) {
+                    console.log(data)
+
+
+
+                    var prevCount = ''
+
+                    for (var i = 0; i < data.records.length; i++) { //outputs the data
+                        var recordi = data.records[i]
+
+                        fetchedData = data //assign data to a global var
+
+                        var userID = recordi.id //unique ID (by Airtable)
+
+                        var userName = recordi.fields.Name; //Name of the user
+
+                        var cardno = recordi.fields.CardNumber //Card No of the user
+
+                        var proxyuserid = userID; //var named proxy user ID to prevent malfunction
+
+                        var lasttransaction = recordi.fields.lastTransaction
+                        var lastamt = recordi.fields.lastTransactionAmount
+
+                        console.log(userID + '🎃' + userName + '🎃' + cardno) //output the value to a console
+
+                        // $('#dataholder').append('<h1 onclick=\"print(this)\" id =\"' + proxyuserid + '\" value = \"' + userID + ' \" onchange=\"enableTxt(this)\">Hello ' + userName + '<h1><br>')
+
+                        $('table tbody').append('<tr id=\"' + userID + '\" value=\"' + userName + '\" onclick=\"update(this)\"><td>' + userName + '</td><td>' + lasttransaction + '</td><td class="childcolright"> ₹ ' + lastamt + '/-</td><tr>')
+
+                        // <tr>
+                        //     <td>Eve</td>
+                        //     <td>Jackson</td>
+                        //     <td class="childcolright">94</td>
+                        // </tr>
+
+
+
+                        //Total Value Logic
+                        totaltransaction = lastamt
+                        transacAdd()
+                        agcal = calculatedtransaction
+
+
+
+                        var setcalue
+
+                        var output = data.records[i].fields.lastTransactionAmount
+
+                        // function addedtrans() {
+                        //     setCount(prevCount => prevCount + prevCount)
+                        //     console.log(setCount)
+                        // }
+
+                        function addedtrans() {
+                            function setCount() {
+                                var localvalue = prevCount
+                                calamt = localvalue * 1 + output / 2;
+                                prevCount = calamt;
+                                // console.log(prevCount + ' :is todays total transaction')
+                                // console.log(localvalue + " =localvalue")
+                                console.log(calamt + " =calamt")
+                                $('#todaytransac').html('₹ ' + calamt)
+
+                            }
+                            // console.log(output)
+
+
+                            setCount()
+                            return calamt;
+
+
+                        }
+
+                        addedtrans()
+                            //this function calculates the total transaction of the DAY
+
+
+                    }
+
+
+
+
+
+
+                })
             }
 
-          </script>
+
+            //logic not working
+            function transacAdd() {
+                var calc = agcal += calculatedtransaction
+
+                calc = totaltransaction
+                console.log('Today\'s total transaction: ' + calc)
+            }
+
+            //This function updates the data in Right Col
+
+            function update(listelm) {
+                indiID = listelm.id;
+                // let id = $(this).attr('id');
+                console.log('A data point is clicked = 🧨' + indiID);
+                // console.log(userID)
 
 
-          <h1>Today's Activity:</h1>
-          <div class="boxcon">
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-          </div>
-          
-        </div>
 
-        <div class="middle"></div>
-        <div class="right">
-            <div class="boxcon">
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-              </div>
-            
-        </div>
-      </div>
+                var fetchedrecords = fetchedData.records;
+
+                var filterdata = fetchedrecords.filter(obj => obj.id == indiID);
+                // var individualData = fetchedData.records[listelm.id].fields
+
+                for (var i = 0; i < fetchedData.records.length; i++) {
+                    if (fetchedData.records[i].id == indiID) {
+                        console.log('success')
+                        console.log(fetchedData.records[i].id)
+                        var matchedvalue = fetchedData.records[i].id;
+                        //more values can be add like after .id.blah blah
+
+                        console.log(matchedvalue + 'is matchedvalue')
+
+                        console.log(fetchedData.records[i].fields.Name)
+                        console.log(fetchedData.records[i].fields.Occupation)
+
+
+                        var sex = '';
+                        var fetchedSex = fetchedData.records[i].fields.Sex
+                            //logic for Sex 
+                        if (fetchedSex == 'M') {
+                            sex = 'Male';
+                        }
+                        if (fetchedSex == 'F') {
+                            sex = 'Female';
+                        }
+                        if (fetchedSex == 'Oth') {
+                            sex = 'oth'
+                        }
+
+
+
+
+                        $('#nameF').html('Name: ' + fetchedData.records[i].fields.Name) //updates the right col feilds
+                        $('#ageF').html('Age: ' + fetchedData.records[i].fields.Age)
+                        $('#sexF').html('Sex: ' + sex)
+                        $('#occuF').html('Occupation: ' + fetchedData.records[i].fields.Occupation)
+                        $('#addF').html('Address: ' + fetchedData.records[i].fields.Address)
+                        $('#uidF').html('UniqueID: <text>' + fetchedData.records[i].id + '<text>')
+                        $('#ucF').html('User Created: ' + fetchedData.records[i].fields.User_Created)
+                        $('#contactF').html('Contact: ' + fetchedData.records[i].fields.Contact_Number)
+
+                        $('#profileImg').attr('src', fetchedData.records[i].fields.altprofilelink)
+                        console.log(fetchedData.records[i].fields.altprofilelink)
+
+                        $('#h2lasttran').html('₹ ' + fetchedData.records[i].fields.lastTransactionAmount)
+
+
+
+
+
+
+                        // ##error the last transaction is showing the date and not time.....it is to be fetched from another directory
+
+                        // console.log(fetchedData.records[i].fields.profileImg)
+                        // if (fetchedData.records[i].fields.profileImg == '') {
+                        //     $('#profileImg').attr('src', fetchedData.records[i].fields.altprofilelink)
+                        // }
+                        // if (fetchedData.records[i].fields.profileImg != '') {
+                        //     $('#profileImg').attr('src', fetchedData.records[i].fields.profileImg)
+                        // }
+
+
+
+
+                        break
+                    } else {
+
+                        // console.log('notmatched')
+                        // console.log(fetchedData.records[i].id)
+                        // console.log(indiID)
+                        continue
+
+                    }
+
+
+
+
+                }
+
+                // $('#displaydata').html('<h1>User Id =' + indiID + '<h1>')
+
+
+            }
+        </script>
+
     </div>
-  </body>
+
+
+</body>
+
 </html>

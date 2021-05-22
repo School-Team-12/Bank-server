@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="dataholder" class="listcon" style="height: 50vh;width: 100vw;"></div>
+
+    <div class="display" id="displaydata">
+        <h1>Click to explore userID</h1>
+    </div>
+
+
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .listcon {
+            padding: 20px;
+        }
+        
+        h1 {
+            margin: 0;
+            padding: 0;
+            line-height: 100%;
+            font-family: monospace;
+        }
+        
+        .display {
+            padding: 10px;
+            border: 2px black solid;
+            border-radius: 10px;
+            margin: 30px;
+        }
+    </style>
+
+    <script>
+        var apiurl = 'https://api.airtable.com/v0/appCfzSqqqkAA8QmB/Basic%20Details';
+
+
+        var fetchedData = '';
+
+        $.ajaxSetup({
+            headers: {
+                'Authorization': 'Bearer keyNsZ0hHEcrleEvY'
+            }
+        });
+
+
+        $(document).ready(function() {
+            $.ajax({
+                method: 'GET',
+                url: apiurl,
+                dataType: 'JSON',
+            }).done(function(data) {
+                console.log(data)
+                console.log(jsonname + "is !empty")
+
+
+                console.log(jsonname)
+
+                for (var i = 0; i < data.records.length; i++) {
+                    var recordi = data.records[i]
+
+                    fetchedData = data
+
+                    var userID = recordi.id
+
+                    var userName = recordi.fields.Name;
+
+                    var cardno = recordi.fields.CardNumber
+
+                    var proxyuserid = userID;
+
+                    console.log(userID + '🎃' + userName + '🎃' + cardno)
+
+                    $('#dataholder').append('<h1 onclick=\"print(this)\" id =\"' + proxyuserid + '\" value = \"' + userID + ' \" onchange=\"enableTxt(this)\">Hello ' + userName + '<h1><br>')
+
+
+
+
+                }
+
+
+            })
+        })
+
+        //*****this section holds the function on click
+
+        function print(listelm) {
+            indiID = listelm.id;
+            // let id = $(this).attr('id');
+            console.log('A data point is clicked = 🧨' + indiID);
+            // console.log(userID)
+
+
+
+            var fetchedrecords = fetchedData.records;
+
+            var filterdata = fetchedrecords.filter(obj => obj.id == indiID);
+            // var individualData = fetchedData.records[listelm.id].fields
+            console.log(filterdata)
+
+            for (var i = 0; i < fetchedData.records.length; i++) {
+                if (fetchedData.records[i].id == indiID) {
+                    console.log('success')
+                    console.log(fetchedData.records[i].id)
+                    var matchedvalue = fetchedData.records[i].id;
+                    //more values can be add like after .id.blah blah
+
+                    console.log(matchedvalue + 'is matchedvalue')
+
+                    console.log(fetchedData.records[i].fields.Name)
+                    console.log(fetchedData.records[i].fields.Occupation)
+                    break
+                } else {
+
+                    // console.log('notmatched')
+                    // console.log(fetchedData.records[i].id)
+                    // console.log(indiID)
+                    continue
+
+                }
+
+
+
+
+            }
+
+            $('#displaydata').html('<h1>User Id =' + indiID + '<h1>')
+
+        }
+    </script>
+
+</body>
+
+</html>
