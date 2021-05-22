@@ -422,7 +422,7 @@
                         $('#occuF').html('Occupation: ' + fetchedData.records[i].fields.Occupation)
                         $('#addF').html('Address: ' + fetchedData.records[i].fields.Address)
                         $('#uidF').html('UniqueID: <text>' + fetchedData.records[i].id + '<text>')
-                        $('#ucF').html('User Created: ' + fetchedData.records[i].fields.User_Created)
+                        $('#ucF').html('User Created: ' + fetchedData.records[i].fields.User_Created.slice(0, 10))
                         $('#contactF').html('Contact: ' + fetchedData.records[i].fields.Contact_Number)
 
                         $('#profileImg').attr('src', fetchedData.records[i].fields.altprofilelink)
