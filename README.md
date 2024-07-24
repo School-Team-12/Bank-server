@@ -10,14 +10,6 @@ Bank Server Project
 
 ![Lines of code](https://img.shields.io/tokei/lines/github/School-Team-12/Bank-server)
 
-## Team Members
-
-      Anurag 
-
-      Anushka
-
-      MandraSaptak
-
 ## Technologies Used
 
     *** Front-End ***
